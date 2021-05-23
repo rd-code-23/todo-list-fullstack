@@ -27,6 +27,20 @@ export const createTodo = async (req, res) => {
     }
 }
 
+export const deleteTodo = async (req, res) => {
+    try {
+        const todo = await Todo.findOneAndDelete({ _id: req.params.id });
+
+        if (!todo) {
+            res.status(404).send();
+        }
+
+        res.send(todo);
+    } catch (error) {
+        res.status(500).send();
+    }
+}
+
 export const deleteTodos = async (req, res) => {
     try {
         await Todo.deleteMany();
