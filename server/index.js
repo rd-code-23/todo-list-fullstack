@@ -1,12 +1,15 @@
-const express = require('express')
-const cors = require('cors')
-require('./db/mongoose')
+import express from "express";
+import cors from "cors";
+import "./db/mongoose";
+import todoRouter from "./routes/todo";
 
-const app = express()
-app.use(cors())
-app.use(express.json())
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-const port = process.env.PORT
+app.use('/todos', todoRouter)
+
+const port = process.env.PORT;
 app.listen(port, () => {
-    console.log('Server is up on port ' + port)
-})
+    console.log('Server is up on port ' + port);
+});
