@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import Todo from "../models/todos";
 const router = new express.Router();
 
-//get all todos
 export const getTodos = async (req, res) => {
     console.log('getting todos');
     try {
@@ -24,6 +23,33 @@ export const createTodo = async (req, res) => {
         res.status(201).send(todo);
     } catch (error) {
         res.status(400).send(error)
+    }
+}
+
+export const editTodo = async (req, res) => {
+    try {
+
+        const updates = Object.keys(req.body) // gets properties
+        console.log(updates);
+        const allowedUpdates = ['text', 'completed'];
+        const isValidOperation = updates.every(update => allowedUpdates.includes(update))
+
+        if (!isValidOperation) {
+            res.status(400).send();
+        }
+
+        const todo = await Todo.findOne({ _id: req.params.id });
+
+        if (!todo) {
+            return res.status(404).send();
+        }
+
+        updates.forEach(update => todo[update] = req.body[update]);
+        await todo.save();
+        res.send(todo)
+
+    } catch (error) {
+        res.status(500).send();
     }
 }
 
