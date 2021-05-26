@@ -8,8 +8,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/todos', todoRouter)
-app.use('/user', userRouter)
+app.use('/todos', todoRouter);
+app.use('/user', userRouter);
 
 const port = process.env.PORT;
 app.listen(port, () => {

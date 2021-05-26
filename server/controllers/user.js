@@ -3,7 +3,6 @@ import User from '../models/user';
 const router = new express.Router();
 
 export const signUp = async (req, res) => {
-
     try {
         const user = new User(req.body);
 
@@ -12,10 +11,21 @@ export const signUp = async (req, res) => {
             console.log('duplicate email');
             return res.status(400).send({ message: "User already exists" })
         }
+
         await user.save();
         res.status(201).send();
     } catch (error) {
         res.status(400).send(error)
+    }
+}
+
+export const login = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const user = await User.findByCredentials(email,password);
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(400).send(error.message)
     }
 }
 
