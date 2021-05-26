@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-   "type": "module" ,
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "env-cmd -f ./config/dev.env nodemon --experimental-specifier-resolution=node index.js "
@@ -16,7 +16,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.10"
+    "mongoose": "^5.12.10",
+    "validator": "^13.6.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",
