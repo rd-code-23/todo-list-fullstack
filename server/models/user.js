@@ -27,6 +27,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }],
 });
 
 //Hash the plain text password before saving
@@ -53,6 +59,14 @@ userSchema.statics.findByCredentials = async (email, password) => {
     }
 
     return user
+}
+
+userSchema.methods.generateAuthToken = async function () {
+    const user = this;
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.SECRET_KEY);
+    user.tokens = user.tokens.concat({ token });
+    await user.save();
+    return token;
 }
 
 const User = mongoose.model('User', userSchema);
