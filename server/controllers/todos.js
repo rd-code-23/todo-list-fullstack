@@ -5,9 +5,12 @@ const router = new express.Router();
 
 export const getTodos = async (req, res) => {
     console.log('getting todos');
+    console.log();
     try {
-        const todos = await Todo.find();
-        res.send(todos);
+        await req.user.populate({
+            path: 'todos',
+        }).execPopulate();
+        res.send(req.user.todos)
     } catch (error) {
         res.status(404).send({ message: error.message })
     }
@@ -15,7 +18,8 @@ export const getTodos = async (req, res) => {
 
 export const createTodo = async (req, res) => {
     const todo = new Todo({
-        ...req.body
+        ...req.body,
+        owner: req.user._id
     });
 
     try {
@@ -38,7 +42,7 @@ export const editTodo = async (req, res) => {
             res.status(400).send();
         }
 
-        const todo = await Todo.findOne({ _id: req.params.id });
+        const todo = await Todo.findOne({ _id: req.params.id, owner: req.user._id });
 
         if (!todo) {
             return res.status(404).send();
@@ -55,7 +59,7 @@ export const editTodo = async (req, res) => {
 
 export const deleteTodo = async (req, res) => {
     try {
-        const todo = await Todo.findOneAndDelete({ _id: req.params.id });
+        const todo = await Todo.findOneAndDelete({ _id: req.params.id, owner: req.user._id });
 
         if (!todo) {
             res.status(404).send();
@@ -69,7 +73,7 @@ export const deleteTodo = async (req, res) => {
 
 export const deleteTodos = async (req, res) => {
     try {
-        await Todo.deleteMany();
+        await Todo.deleteMany({ owner: req.user._id });
         res.send();
     } catch (error) {
         res.status(500).send(error.message)

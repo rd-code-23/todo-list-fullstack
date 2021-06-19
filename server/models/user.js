@@ -35,6 +35,12 @@ const userSchema = new mongoose.Schema({
     }],
 });
 
+userSchema.virtual('todos', {
+    ref: 'Todo',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 //Hash the plain text password before saving
 userSchema.pre('save', async function (next) {
     const user = this
@@ -63,10 +69,19 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this;
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.SECRET_KEY);
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
     user.tokens = user.tokens.concat({ token });
     await user.save();
     return token;
+}
+
+//remove important information from the response
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject(); // Converts this document into a plain-old JavaScript object 
+    delete userObject.password
+    delete userObject.tokens
+    return userObject;
 }
 
 const User = mongoose.model('User', userSchema);
