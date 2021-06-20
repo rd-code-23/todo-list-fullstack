@@ -16,7 +16,6 @@ const todoSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     }
-
 });
 
 const Todo = mongoose.model('Todo', todoSchema);

@@ -45,6 +45,15 @@ export const logout = async (req, res) => {
     }
 }
 
+export const deleteUser = async (req, res) => {
+    try {
+        await req.user.remove();
+        res.send(req.user);
+    } catch (e) {
+        res.status(500).send();
+    }
+}
+
 export const deleteUsers = async (req, res) => {
     try {
         await User.deleteMany();

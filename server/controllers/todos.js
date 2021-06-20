@@ -4,8 +4,6 @@ import Todo from "../models/todos";
 const router = new express.Router();
 
 export const getTodos = async (req, res) => {
-    console.log('getting todos');
-    console.log();
     try {
         await req.user.populate({
             path: 'todos',
