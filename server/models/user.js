@@ -51,6 +51,13 @@ userSchema.pre('save', async function (next) {
     next()
 });
 
+// Delete user tasks when user is removed 
+userSchema.pre('remove', async function (next) {
+    const user = this;
+    await Todo.deleteMany({ owner: user._id });
+    next();
+});
+
 userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({ email });
 
