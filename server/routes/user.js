@@ -5,7 +5,7 @@ import { signUp, login, deleteUsers, deleteUser, logout } from '../controllers/u
 const router = new express.Router();
 
 router.post('/signup', signUp);
-router.get('/login', login);
+router.post('/login', login);
 router.post('/logout', auth, logout);
 router.delete('/delete', auth, deleteUser);
 //router.delete('/', deleteUsers);

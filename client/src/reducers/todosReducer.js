@@ -2,9 +2,18 @@ import { v4 as uuid } from 'uuid'
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'SET_TODOS':
+            console.log(action.payload);
+            // const newTodos = [...state.todos, action.payload]
+            //console.log(newTodos);
+            return {
+                ...state,
+                todos: action.payload,
+                editTodo: -1
+            }
         case 'ADD_TODO':
             const newTodo = {
-                id: uuid(),
+                _id: uuid(),
                 text: action.payload
             }
 
@@ -17,7 +26,7 @@ const reducer = (state, action) => {
 
         case 'EDIT_TODO':
             const newEditTodos = state.todos.map(todo => {
-                if (todo.id === state.editTodo.id) {
+                if (todo._id === state.editTodo._id) {
                     todo.text = action.payload;
                 }
                 return todo
@@ -30,7 +39,7 @@ const reducer = (state, action) => {
             }
 
         case 'DELETE_TODO':
-            const deleteTodos = state.todos.filter(todo => action.payload !== todo.id)
+            const deleteTodos = state.todos.filter(todo => action.payload !== todo._id)
             return {
                 ...state,
                 todos: deleteTodos
@@ -43,7 +52,7 @@ const reducer = (state, action) => {
 
         case 'COMPLETE_TODO':
             const completeTodos = state.todos.map(todo => {
-                if (todo.id === action.payload) {
+                if (todo._id === action.payload) {
                     todo.isComplete = !todo.isComplete;
                 }
                 return todo;
@@ -55,7 +64,7 @@ const reducer = (state, action) => {
 
         case 'SET_EDIT_TODO':
             //undo edit
-            if (state.editTodo.id === action.payload.id) {
+            if (state.editTodo._id === action.payload._id) {
                 return {
                     ...state,
                     editTodo: -1

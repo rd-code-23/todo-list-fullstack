@@ -2,9 +2,12 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import { Grid, Fab, TextField, } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import TodosContext from '../../context/TodosContext';
+import { addTodo } from '../../actions/todos';
+import { AuthContext } from '../../context/AuthContext';
 
 const AddTodo = () => {
     const { todosState, todosDispatch } = useContext(TodosContext);
+    const { authState, authDispatch } = useContext(AuthContext);
 
     const [value, setValue] = useState("");
 
@@ -23,9 +26,13 @@ const AddTodo = () => {
         if (value.trim() === '') {
             alert("cannot add blank note");
         } else {
-            todosState.editTodo === -1 ?
-                todosDispatch({ type: 'ADD_TODO', payload: value }) :
-                todosDispatch({ type: 'EDIT_TODO', payload: value })
+
+            authState.user && todosState.editTodo === -1 ? addTodo(value, todosDispatch) : todosDispatch({ type: 'ADD_TODO', payload: value });
+            // authState.user && !todosState.editTodo === -1  ?  addTodo(value,dispatch) :  dispatch({ type: 'ADD_TODO', payload: value });
+
+            // todosState.editTodo === -1 ?
+            //     todosDispatch({ type: 'ADD_TODO', payload: value }) :
+            //     todosDispatch({ type: 'EDIT_TODO', payload: value })
             setValue('');
         }
         //  }

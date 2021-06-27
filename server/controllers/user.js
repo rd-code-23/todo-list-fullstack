@@ -8,8 +8,8 @@ export const signUp = async (req, res) => {
 
         const duplicateEmail = await User.findOne({ email: user.email });
         if (duplicateEmail) {
-            console.log('duplicate email');
-            return res.status(400).send({ message: "User already exists" })
+            //return res.status(400).send({ message: "User already exists" })
+            throw new Error('User already exists');
         }
 
         await user.save();
@@ -17,7 +17,7 @@ export const signUp = async (req, res) => {
 
         res.status(201).send({ user, token });
     } catch (error) {
-        res.status(400).send(error)
+        res.status(400).send(error.message)
     }
 }
 
