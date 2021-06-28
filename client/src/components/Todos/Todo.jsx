@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../../context/TodosContext';
+import { AuthContext } from '../../context/AuthContext';
+import { deleteTodo } from '../../actions/todos';
 import { makeStyles } from '@material-ui/core/styles';
 import Media from 'react-media';
 import LargeTable from './tables/LargeTable'
@@ -7,6 +9,7 @@ import SmallTable from './tables/SmallTable'
 
 const Todo = ({ todo, index, theme }) => {
     const { todosState, todosDispatch } = useContext(TodosContext);
+    const { authState, authDispatch } = useContext(AuthContext);
 
     const useStyles = makeStyles(theme => ({
         edit: {
@@ -21,8 +24,8 @@ const Todo = ({ todo, index, theme }) => {
 
     const classes = useStyles(theme);
 
-    const handleDelete = () => {
-        todosDispatch({ type: 'DELETE_TODO', payload: todo._id });
+    const handleDelete = async () => {
+        authState.user ? await deleteTodo(todo._id, todosDispatch) : todosDispatch({ type: 'DELETE_TODO', payload: todo._id });
     }
 
     const handleEdit = () => {

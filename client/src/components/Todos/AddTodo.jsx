@@ -20,14 +20,14 @@ const AddTodo = () => {
         setValue(e.target.value);
     }
 
-    const handleAdd = (e) => {
+    const handleAdd = async (e) => {
         e.preventDefault();
         // if (e.keyCode === 13) {
         if (value.trim() === '') {
             alert("cannot add blank note");
         } else {
 
-            authState.user && todosState.editTodo === -1 ? addTodo(value, todosDispatch) : todosDispatch({ type: 'ADD_TODO', payload: value });
+            authState.user && todosState.editTodo === -1 ? await addTodo(value, todosDispatch) : todosDispatch({ type: 'ADD_TODO', payload: value });
             // authState.user && !todosState.editTodo === -1  ?  addTodo(value,dispatch) :  dispatch({ type: 'ADD_TODO', payload: value });
 
             // todosState.editTodo === -1 ?

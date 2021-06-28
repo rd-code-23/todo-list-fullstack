@@ -12,9 +12,24 @@ export const getTodos = async (dispatch) => {
 
 export const addTodo = async (todo, dispatch) => {
     try {
-        const todoData = { text: todo, completed: false }
+        let todoData = { text: todo, completed: false }
         const { data } = await api.addTodo(todoData);
-        dispatch({ type: 'ADD_TODO', payload: todo });
+        todoData = { ...todoData, _id: data._id }
+        console.log(todo);
+        console.log(todoData);
+        dispatch({ type: 'ADD_TODO', payload: todoData });
+        return true;
+    } catch (error) {
+        return false;
+    }
+};
+
+export const deleteTodo = async (id, dispatch) => {
+    try {
+        console.log(id);
+        const { data } = await api.deleteTodo(id);
+        console.log(data);
+        dispatch({ type: 'DELETE_TODO', payload: data._id });
         return true;
     } catch (error) {
         return false;
