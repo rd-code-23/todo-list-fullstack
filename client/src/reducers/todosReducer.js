@@ -3,14 +3,12 @@ import { v4 as uuid } from 'uuid'
 const reducer = (state, action) => {
     switch (action.type) {
         case 'SET_TODOS':
-            console.log(action.payload);
-            // const newTodos = [...state.todos, action.payload]
-            //console.log(newTodos);
             return {
                 ...state,
                 todos: action.payload,
                 editTodo: -1
             }
+
         case 'ADD_TODO':
             const newTodo = {
                 _id: uuid(),
@@ -92,7 +90,6 @@ const reducer = (state, action) => {
         default:
             return state;
     }
-
 }
 
 export default reducer
