@@ -15,8 +15,7 @@ const Auth = () => {
     const { todosState, todosDispatch } = useContext(TodosContext);
 
     const handleLogout = async () => {
-        await signout(authDispatch);
-        todosDispatch({ type: 'DELETE_ALL_TODO' });
+        await signout(authDispatch, todosDispatch);
         isSetAskForSaveTodos(false);
     }
 

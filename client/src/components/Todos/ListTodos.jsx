@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Grid, Paper, Table, TableContainer, TableBody } from '@material-ui/core';
 import Todo from './Todo';
 import TodosContext from '../../context/TodosContext';
+import { FILTER_COMPLETE, FILTER_INCOMPLETE } from '../../constants/filterValues';
 
 const ListTodos = ({ theme }) => {
     const { todosState } = useContext(TodosContext);
@@ -10,10 +11,10 @@ const ListTodos = ({ theme }) => {
 
     useEffect(() => {
         switch (todosState.filterState) {
-            case "complete":
+            case FILTER_COMPLETE:
                 setFilterdTodos(todosState.todos.filter(todo => todo.isComplete))
                 break;
-            case "incomplete":
+            case FILTER_INCOMPLETE:
                 setFilterdTodos(todosState.todos.filter(todo => !todo.isComplete))
                 break;
             default:

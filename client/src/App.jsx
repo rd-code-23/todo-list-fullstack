@@ -11,7 +11,8 @@ import TodosReducer from './reducers/todosReducer.js';
 import AuthContext from './context/AuthContext';
 import AuthReducer from './reducers/authReducer';
 import { getTodos } from './actions/todos';
-
+import { SIGN_IN } from "./constants/actionTypes";
+import { PROFILE } from './constants/localStorage';
 
 const theme = createMuiTheme({
   palette: {
@@ -48,13 +49,13 @@ function App() {
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const data = JSON.parse(localStorage.getItem('profile'));
-      authDispatch({ type: 'SIGN_IN', payload: data });
+      const data = JSON.parse(localStorage.getItem(PROFILE));
+      authDispatch({ type: SIGN_IN, payload: data });
       await getTodos(todosDispatch);
     }
 
     //login if there is a profile 
-    if (localStorage.getItem('profile')) {
+    if (localStorage.getItem(PROFILE)) {
       fetchTodos()
     }
   }, []);

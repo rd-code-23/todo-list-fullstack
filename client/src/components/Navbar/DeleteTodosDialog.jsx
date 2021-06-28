@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@material-ui/core';
+import { DELETE_ALL_TODO } from "../../constants/actionTypes";
 
 const DeleteTodosDialog = ({ todosDispatch, setIsShowDeleteTodosDialog }) => {
     const [open, setOpen] = useState(true);
 
     const handleDeleteAll = () => {
-        todosDispatch({ type: 'DELETE_ALL_TODO' });
+        todosDispatch({ type: DELETE_ALL_TODO });
         setOpen(false);
         setIsShowDeleteTodosDialog(false);
     }

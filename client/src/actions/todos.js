@@ -1,9 +1,10 @@
 import * as api from '../api/api';
+import { SET_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, DELETE_ALL_TODO, COMPLETE_TODO, SET_EDIT_TODO, SET_FILTER_TODO, TOGGLE_ROW_COLOR } from "../constants/actionTypes";
 
 export const getTodos = async (dispatch) => {
     try {
         const { data } = await api.getTodos();
-        dispatch({ type: 'SET_TODOS', payload: data });
+        dispatch({ type: SET_TODOS, payload: data });
         return true;
     } catch (error) {
         return false;
@@ -17,7 +18,7 @@ export const addTodo = async (todo, dispatch) => {
         todoData = { ...todoData, _id: data._id }
         console.log(todo);
         console.log(todoData);
-        dispatch({ type: 'ADD_TODO', payload: todoData });
+        dispatch({ type: ADD_TODO, payload: todoData });
         return true;
     } catch (error) {
         return false;
@@ -29,7 +30,7 @@ export const deleteTodo = async (id, dispatch) => {
         console.log(id);
         const { data } = await api.deleteTodo(id);
         console.log(data);
-        dispatch({ type: 'DELETE_TODO', payload: data._id });
+        dispatch({ type: DELETE_TODO, payload: data._id });
         return true;
     } catch (error) {
         return false;

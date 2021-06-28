@@ -4,8 +4,9 @@ import { AuthContext } from '../../context/AuthContext';
 import { deleteTodo } from '../../actions/todos';
 import { makeStyles } from '@material-ui/core/styles';
 import Media from 'react-media';
-import LargeTable from './tables/LargeTable'
-import SmallTable from './tables/SmallTable'
+import LargeTable from './tables/LargeTable';
+import SmallTable from './tables/SmallTable';
+import { DELETE_TODO, SET_EDIT_TODO, COMPLETE_TODO } from "../../constants/actionTypes";
 
 const Todo = ({ todo, index, theme }) => {
     const { todosState, todosDispatch } = useContext(TodosContext);
@@ -25,15 +26,15 @@ const Todo = ({ todo, index, theme }) => {
     const classes = useStyles(theme);
 
     const handleDelete = async () => {
-        authState.user ? await deleteTodo(todo._id, todosDispatch) : todosDispatch({ type: 'DELETE_TODO', payload: todo._id });
+        authState.user ? await deleteTodo(todo._id, todosDispatch) : todosDispatch({ type: DELETE_TODO, payload: todo._id });
     }
 
     const handleEdit = () => {
-        todosDispatch({ type: 'SET_EDIT_TODO', payload: todo });
+        todosDispatch({ type: SET_EDIT_TODO, payload: todo });
     }
 
     const handleComplete = () => {
-        todosDispatch({ type: 'COMPLETE_TODO', payload: todo._id });
+        todosDispatch({ type: COMPLETE_TODO, payload: todo._id });
     }
 
     const handleRowColor = (index, iaAlternateRowColor) => {

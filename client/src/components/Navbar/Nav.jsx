@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import TodosContext from '../../context/TodosContext';
 import DeleteTodosDialog from './DeleteTodosDialog';
 import Auth from '../Auth/Auth'
+import { TOGGLE_ROW_COLOR } from "../../constants/actionTypes";
 
 const Nav = () => {
     const { todosState, todosDispatch } = useContext(TodosContext);
@@ -11,7 +12,7 @@ const Nav = () => {
     const [isShowDeleteTodosDialog, setIsShowDeleteTodosDialog] = useState(false);
 
     const handleAlternateRowColor = () => {
-        todosDispatch({ type: 'TOGGLE_ROW_COLOR' });
+        todosDispatch({ type: TOGGLE_ROW_COLOR });
     };
 
     const handleDeleteTodosDialog = () => {

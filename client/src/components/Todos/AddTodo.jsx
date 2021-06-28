@@ -4,6 +4,7 @@ import AddIcon from '@material-ui/icons/Add';
 import TodosContext from '../../context/TodosContext';
 import { addTodo } from '../../actions/todos';
 import { AuthContext } from '../../context/AuthContext';
+import { ADD_TODO } from "../../constants/actionTypes";
 
 const AddTodo = () => {
     const { todosState, todosDispatch } = useContext(TodosContext);
@@ -27,7 +28,7 @@ const AddTodo = () => {
             alert("cannot add blank note");
         } else {
 
-            authState.user && todosState.editTodo === -1 ? await addTodo(value, todosDispatch) : todosDispatch({ type: 'ADD_TODO', payload: value });
+            authState.user && todosState.editTodo === -1 ? await addTodo(value, todosDispatch) : todosDispatch({ type: ADD_TODO, payload: value });
             // authState.user && !todosState.editTodo === -1  ?  addTodo(value,dispatch) :  dispatch({ type: 'ADD_TODO', payload: value });
 
             // todosState.editTodo === -1 ?
