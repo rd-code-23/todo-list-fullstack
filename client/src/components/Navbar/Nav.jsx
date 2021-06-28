@@ -3,6 +3,7 @@ import { Grid, Fab, Switch, Tooltip } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TodosContext from '../../context/TodosContext';
 import DeleteTodosDialog from './DeleteTodosDialog';
+import Auth from '../Auth/Auth'
 
 const Nav = () => {
     const { todosState, todosDispatch } = useContext(TodosContext);
@@ -38,6 +39,9 @@ const Nav = () => {
                     }
                 </Grid>
             </Tooltip>
+
+            <Auth />
+
         </Grid>
     )
 }

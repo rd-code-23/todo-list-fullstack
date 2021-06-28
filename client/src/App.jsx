@@ -1,15 +1,17 @@
 import './App.css';
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { Grid, Paper, } from '@material-ui/core';
+import { Grid, Paper, AppBar, Toolbar } from '@material-ui/core';
 import Nav from './components/Navbar/Nav';
 import AddTodo from './components/Todos/AddTodo';
 import FilterTodos from './components/Todos/FilterTodos';
 import ListTodos from './components/Todos/ListTodos';
 import TodosContext from './context/TodosContext';
 import TodosReducer from './reducers/todosReducer.js';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import AuthContext from './context/AuthContext';
+import AuthReducer from './reducers/authReducer';
+import { getTodos } from './actions/todos';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -37,32 +39,51 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
-  const todosInitialState = useContext(TodosContext)
-  const [todosState, todosDispatch] = useReducer(TodosReducer, todosInitialState)
+
+  const todosInitialState = useContext(TodosContext);
+  const [todosState, todosDispatch] = useReducer(TodosReducer, todosInitialState);
+
+  const authInitialState = useContext(AuthContext)
+  const [authState, authDispatch] = useReducer(AuthReducer, authInitialState)
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const data = JSON.parse(localStorage.getItem('profile'));
+      authDispatch({ type: 'SIGN_IN', payload: data });
+      await getTodos(todosDispatch);
+    }
+
+    //login if there is a profile 
+    if (localStorage.getItem('profile')) {
+      fetchTodos()
+    }
+  }, []);
 
   return (
     <TodosContext.Provider value={{ todosState, todosDispatch }}>
-      <ThemeProvider theme={theme}>
-        <Paper className={classes.appContainer} square>
-          <AppBar >
-            <Toolbar className={classes.toolbar}>
-              <Nav />
-            </Toolbar>
-          </AppBar>
+      <AuthContext.Provider value={{ authState, authDispatch }}>
+        <ThemeProvider theme={theme}>
+          <Paper className={classes.appContainer} square>
+            <AppBar >
+              <Toolbar className={classes.toolbar}>
+                <Nav />
+              </Toolbar>
+            </AppBar>
 
-          <Grid container justify="center" alignItems="center" >
-            <Grid item >
-              <Paper elevation={15} className={classes.todosContainer}>
-                <AddTodo />
-                <FilterTodos theme={theme} />
-                <Paper style={{ maxHeight: '60vh', overflow: 'auto', paddingBottom: '10px' }} elevation={0}>
-                  <ListTodos theme={theme} />
+            <Grid container justify="center" alignItems="center" >
+              <Grid item >
+                <Paper elevation={15} className={classes.todosContainer}>
+                  <AddTodo />
+                  <FilterTodos theme={theme} />
+                  <Paper style={{ maxHeight: '60vh', overflow: 'auto', paddingBottom: '10px' }} elevation={0}>
+                    <ListTodos theme={theme} />
+                  </Paper>
                 </Paper>
-              </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </ThemeProvider>
+          </Paper>
+        </ThemeProvider>
+      </AuthContext.Provider>
     </TodosContext.Provider>
   );
 

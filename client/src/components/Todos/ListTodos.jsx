@@ -30,7 +30,7 @@ const ListTodos = ({ theme }) => {
                 <Table size="small" aria-label="a dense table" >
                     <TableBody >
                         {filteredTodos.map((todo, index) => (
-                            <Todo todo={todo} index={index} theme={theme} key={todo.id} />
+                            <Todo todo={todo} index={index} theme={theme} key={todo._id} />
                         ))}
                     </TableBody>
                 </Table>

@@ -10,11 +10,11 @@ const Todo = ({ todo, index, theme }) => {
 
     const useStyles = makeStyles(theme => ({
         edit: {
-            backgroundColor: todosState.editTodo.id === todo.id ? '#283618' : 'dark',
+            backgroundColor: todosState.editTodo._id === todo._id ? '#283618' : 'dark',
         },
 
         classesRowEvenColor: {
-            backgroundColor: todosState.editTodo.id === todo.id ? '#283618' : theme.palette.divider,
+            backgroundColor: todosState.editTodo._id === todo._id ? '#283618' : theme.palette.divider,
         },
 
     }));
@@ -22,7 +22,7 @@ const Todo = ({ todo, index, theme }) => {
     const classes = useStyles(theme);
 
     const handleDelete = () => {
-        todosDispatch({ type: 'DELETE_TODO', payload: todo.id });
+        todosDispatch({ type: 'DELETE_TODO', payload: todo._id });
     }
 
     const handleEdit = () => {
@@ -30,7 +30,7 @@ const Todo = ({ todo, index, theme }) => {
     }
 
     const handleComplete = () => {
-        todosDispatch({ type: 'COMPLETE_TODO', payload: todo.id });
+        todosDispatch({ type: 'COMPLETE_TODO', payload: todo._id });
     }
 
     const handleRowColor = (index, iaAlternateRowColor) => {
