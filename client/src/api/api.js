@@ -21,3 +21,4 @@ export const signOut = (token) => API.post('/user/logout', token);
 export const getTodos = () => API.get('/todos/');
 export const addTodo = (todo) => API.post('/todos/', todo);
 export const deleteTodo = (id) => API.delete(`/todos/${id}`);
+export const deleteAllTodos = () => API.delete(`/todos/`);

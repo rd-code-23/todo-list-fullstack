@@ -27,10 +27,18 @@ export const addTodo = async (todo, dispatch) => {
 
 export const deleteTodo = async (id, dispatch) => {
     try {
-        console.log(id);
         const { data } = await api.deleteTodo(id);
-        console.log(data);
         dispatch({ type: DELETE_TODO, payload: data._id });
+        return true;
+    } catch (error) {
+        return false;
+    }
+};
+
+export const deleteAllTodos = async (dispatch) => {
+    try {
+        await api.deleteAllTodos();
+        dispatch({ type: DELETE_ALL_TODO });
         return true;
     } catch (error) {
         return false;

@@ -56,7 +56,7 @@ function App() {
 
     //login if there is a profile 
     if (localStorage.getItem(PROFILE)) {
-      fetchTodos()
+      fetchTodos();
     }
   }, []);
 
