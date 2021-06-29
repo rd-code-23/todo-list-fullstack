@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../../context/TodosContext';
 import { AuthContext } from '../../context/AuthContext';
-import { deleteTodo } from '../../actions/todos';
+import { deleteTodo, completeTodo } from '../../actions/todos';
 import { makeStyles } from '@material-ui/core/styles';
 import Media from 'react-media';
 import LargeTable from './tables/LargeTable';
@@ -33,8 +33,10 @@ const Todo = ({ todo, index, theme }) => {
         todosDispatch({ type: SET_EDIT_TODO, payload: todo });
     }
 
-    const handleComplete = () => {
-        todosDispatch({ type: COMPLETE_TODO, payload: todo._id });
+    const handleComplete = async () => {
+        authState.user ? await completeTodo(todo._id, todo, todosDispatch) : todosDispatch({ type: COMPLETE_TODO, payload: todo._id });
+
+        // todosDispatch({ type: COMPLETE_TODO, payload: todo._id });
     }
 
     const handleRowColor = (index, iaAlternateRowColor) => {

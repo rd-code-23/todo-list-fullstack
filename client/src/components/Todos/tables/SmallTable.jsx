@@ -44,10 +44,7 @@ const SmallTable = ({ todo, index, iaAlternateRowColor, handleDelete, handleEdit
                     <IconButton aria-label="complete"><DoneIcon /></IconButton>
                 </TableCell>
             </TableRow>
-
         </>
-
-
     )
 }
 

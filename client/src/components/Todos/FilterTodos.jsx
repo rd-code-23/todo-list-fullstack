@@ -19,7 +19,6 @@ const FilterTodos = ({ theme }) => {
     const handleChange = (event) => {
         console.log("changin todos state", event.target.value);
         todosDispatch({ type: SET_FILTER_TODO, payload: event.target.value });
-
     };
 
     return (

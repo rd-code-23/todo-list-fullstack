@@ -44,8 +44,8 @@ function App() {
   const todosInitialState = useContext(TodosContext);
   const [todosState, todosDispatch] = useReducer(TodosReducer, todosInitialState);
 
-  const authInitialState = useContext(AuthContext)
-  const [authState, authDispatch] = useReducer(AuthReducer, authInitialState)
+  const authInitialState = useContext(AuthContext);
+  const [authState, authDispatch] = useReducer(AuthReducer, authInitialState);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -56,6 +56,7 @@ function App() {
 
     //login if there is a profile 
     if (localStorage.getItem(PROFILE)) {
+      console.log('loading profile');
       fetchTodos();
     }
   }, []);

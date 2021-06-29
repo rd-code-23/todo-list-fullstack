@@ -22,3 +22,4 @@ export const getTodos = () => API.get('/todos/');
 export const addTodo = (todo) => API.post('/todos/', todo);
 export const deleteTodo = (id) => API.delete(`/todos/${id}`);
 export const deleteAllTodos = () => API.delete(`/todos/`);
+export const editTodo = (id,todo) => API.patch(`/todos/${id}`,todo);

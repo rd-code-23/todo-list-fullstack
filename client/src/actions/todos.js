@@ -4,6 +4,7 @@ import { SET_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, DELETE_ALL_TODO, COMPLETE_
 export const getTodos = async (dispatch) => {
     try {
         const { data } = await api.getTodos();
+        console.log(data);
         dispatch({ type: SET_TODOS, payload: data });
         return true;
     } catch (error) {
@@ -13,11 +14,9 @@ export const getTodos = async (dispatch) => {
 
 export const addTodo = async (todo, dispatch) => {
     try {
-        let todoData = { text: todo, completed: false }
+        let todoData = { text: todo.text, isComplete: todo.isComplete }
         const { data } = await api.addTodo(todoData);
         todoData = { ...todoData, _id: data._id }
-        console.log(todo);
-        console.log(todoData);
         dispatch({ type: ADD_TODO, payload: todoData });
         return true;
     } catch (error) {
@@ -45,11 +44,24 @@ export const deleteAllTodos = async (dispatch) => {
     }
 };
 
+export const completeTodo = async (id, todo, dispatch) => {
+    try {
+        todo = { text: todo.text, isComplete: !!todo.isComplete }
+        todo.isComplete = !todo.isComplete;
+        await api.editTodo(id, todo);
+        dispatch({ type: COMPLETE_TODO, payload: id });
+        return true;
+    } catch (error) {
+        return false;
+    }
+};
+
 //for todos user added before sign in 
 export const saveCurrentTodos = async (todos, dispatch) => {
     try {
         for (const todo of todos) {
-            await addTodo(todo.text, dispatch);
+            console.log(todo);
+            await addTodo(todo, dispatch);
         }
     } catch (error) {
         return false;

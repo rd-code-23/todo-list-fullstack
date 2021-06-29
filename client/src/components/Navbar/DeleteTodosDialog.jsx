@@ -7,7 +7,7 @@ const DeleteTodosDialog = ({ todosDispatch, setIsShowDeleteTodosDialog, authStat
     const [open, setOpen] = useState(true);
 
     const handleDeleteAll = async () => {
-        authState.usergitr ? await deleteAllTodos(todosDispatch) : todosDispatch({ type: DELETE_ALL_TODO });
+        authState.user ? await deleteAllTodos(todosDispatch) : todosDispatch({ type: DELETE_ALL_TODO });
         setOpen(false);
         setIsShowDeleteTodosDialog(false);
     }
