@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 import IconButton from '@material-ui/core/IconButton';
+
 const SmallTable = ({ todo, index, iaAlternateRowColor, handleDelete, handleEdit, handleComplete, classesEdit, handleRowColor }) => {
     return (
         <>
@@ -43,10 +44,7 @@ const SmallTable = ({ todo, index, iaAlternateRowColor, handleDelete, handleEdit
                     <IconButton aria-label="complete"><DoneIcon /></IconButton>
                 </TableCell>
             </TableRow>
-
         </>
-
-
     )
 }
 

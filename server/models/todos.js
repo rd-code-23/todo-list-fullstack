@@ -5,10 +5,10 @@ const todoSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    completed: {
-        type: String,
-        required: true,
+    }, 
+    isComplete: {
+        type: Boolean,
+        default: false,
         trim: true
     },
     owner: {

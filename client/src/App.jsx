@@ -11,7 +11,8 @@ import TodosReducer from './reducers/todosReducer.js';
 import AuthContext from './context/AuthContext';
 import AuthReducer from './reducers/authReducer';
 import { getTodos } from './actions/todos';
-
+import { SIGN_IN } from "./constants/actionTypes";
+import { PROFILE } from './constants/localStorage';
 
 const theme = createMuiTheme({
   palette: {
@@ -43,19 +44,20 @@ function App() {
   const todosInitialState = useContext(TodosContext);
   const [todosState, todosDispatch] = useReducer(TodosReducer, todosInitialState);
 
-  const authInitialState = useContext(AuthContext)
-  const [authState, authDispatch] = useReducer(AuthReducer, authInitialState)
+  const authInitialState = useContext(AuthContext);
+  const [authState, authDispatch] = useReducer(AuthReducer, authInitialState);
 
   useEffect(() => {
     const fetchTodos = async () => {
-      const data = JSON.parse(localStorage.getItem('profile'));
-      authDispatch({ type: 'SIGN_IN', payload: data });
+      const data = JSON.parse(localStorage.getItem(PROFILE));
+      authDispatch({ type: SIGN_IN, payload: data });
       await getTodos(todosDispatch);
     }
 
     //login if there is a profile 
-    if (localStorage.getItem('profile')) {
-      fetchTodos()
+    if (localStorage.getItem(PROFILE)) {
+      console.log('loading profile');
+      fetchTodos();
     }
   }, []);
 

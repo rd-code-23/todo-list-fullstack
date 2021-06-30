@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Grid, FormControl, InputLabel, Select } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TodosContext from '../../context/TodosContext';
+import { SET_FILTER_TODO } from "../../constants/actionTypes";
+import { FILTER_ALL, FILTER_COMPLETE, FILTER_INCOMPLETE } from '../../constants/filterValues';
 
 const FilterTodos = ({ theme }) => {
     const { todosState, todosDispatch } = useContext(TodosContext);
@@ -15,9 +17,7 @@ const FilterTodos = ({ theme }) => {
     const classes = useStyles();
 
     const handleChange = (event) => {
-        console.log("changin todos state", event.target.value);
-        todosDispatch({ type: 'SET_FILTER_TODO', payload: event.target.value });
-
+        todosDispatch({ type: SET_FILTER_TODO, payload: event.target.value });
     };
 
     return (
@@ -34,10 +34,9 @@ const FilterTodos = ({ theme }) => {
                         id: 'age-native-helper',
                     }}
                 >
-                    {/* <option aria-label="None" value="" /> */}
-                    <option value={"all"}>All</option>
-                    <option value={"complete"}>Complete</option>
-                    <option value={"incomplete"}>Incomplete</option>
+                    <option value={FILTER_ALL}>All</option>
+                    <option value={FILTER_COMPLETE}>Complete</option>
+                    <option value={FILTER_INCOMPLETE}>Incomplete</option>
                 </Select>
             </FormControl>
         </Grid>

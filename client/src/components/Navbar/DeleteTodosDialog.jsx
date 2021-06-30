@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@material-ui/core';
+import { deleteAllTodos } from '../../actions/todos'
+import { DELETE_ALL_TODO } from "../../constants/actionTypes";
 
-const DeleteTodosDialog = ({ todosDispatch, setIsShowDeleteTodosDialog }) => {
+const DeleteTodosDialog = ({ todosDispatch, setIsShowDeleteTodosDialog, authState }) => {
     const [open, setOpen] = useState(true);
 
-    const handleDeleteAll = () => {
-        todosDispatch({ type: 'DELETE_ALL_TODO' });
+    const handleDeleteAll = async () => {
+        authState.user ? await deleteAllTodos(todosDispatch) : todosDispatch({ type: DELETE_ALL_TODO });
         setOpen(false);
         setIsShowDeleteTodosDialog(false);
     }

@@ -3,6 +3,7 @@ import { Button, makeStyles, Grid } from '@material-ui/core';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { signin, signup } from '../../actions/auth';
+import { AUTH_FAIL } from '../../constants/actionTypes';
 import { getTodos } from '../../actions/todos';
 import Input from './Input';
 
@@ -38,14 +39,14 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
     const handleClose = () => {
         setOpen(false);
         isSetShowAuthFormDialog(false)
-        authDispatch({ type: 'FAIL', payload: null }); // clear error message
+        authDispatch({ type: AUTH_FAIL, payload: null }); // clear error message
     };
 
     const handleLogin = async () => {
         const form = { name, email, password };
 
         if (isSignUp && password !== confirmPassword) {
-            authDispatch({ type: 'FAIL', payload: 'Passwords not matching' });
+            authDispatch({ type: AUTH_FAIL, payload: 'Passwords not matching' });
             return
         }
 
@@ -96,7 +97,7 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
 
             <DialogActions>
                 <Button autoFocus variant="contained" onClick={handleLogin} color="secondary">
-                    {isSignUp ? 'Signup' : '    Login'}
+                    {isSignUp ? 'Signup' : 'Login'}
                 </Button>
             </DialogActions>
         </Dialog>

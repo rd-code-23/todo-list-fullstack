@@ -1,28 +1,34 @@
 import { v4 as uuid } from 'uuid'
+import { SET_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, DELETE_ALL_TODO, COMPLETE_TODO, SET_EDIT_TODO, SET_FILTER_TODO, TOGGLE_ROW_COLOR } from "../constants/actionTypes";
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'SET_TODOS':
+        case SET_TODOS:
             return {
                 ...state,
                 todos: action.payload,
-                editTodo: -1
+                editTodo: null
             }
 
-        case 'ADD_TODO':
-            const newTodo = {
-                _id: uuid(),
-                text: action.payload
-            }
+        case ADD_TODO:
+            let newTodos = null;
 
-            const newTodos = [...state.todos, newTodo];
+            if (!action.payload._id) {
+                const newTodo = {
+                    _id: uuid(),
+                    text: action.payload
+                }
+                newTodos = [...state.todos, newTodo];
+            } else {
+                newTodos = [...state.todos, action.payload];
+            }
 
             return {
                 ...state,
                 todos: newTodos
             }
 
-        case 'EDIT_TODO':
+        case EDIT_TODO:
             const newEditTodos = state.todos.map(todo => {
                 if (todo._id === state.editTodo._id) {
                     todo.text = action.payload;
@@ -33,22 +39,23 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 todos: newEditTodos,
-                editTodo: -1
+                editTodo: null
             }
 
-        case 'DELETE_TODO':
+        case DELETE_TODO:
             const deleteTodos = state.todos.filter(todo => action.payload !== todo._id)
             return {
                 ...state,
                 todos: deleteTodos
             }
-        case 'DELETE_ALL_TODO':
+
+        case DELETE_ALL_TODO:
             return {
                 ...state,
                 todos: []
             }
 
-        case 'COMPLETE_TODO':
+        case COMPLETE_TODO:
             const completeTodos = state.todos.map(todo => {
                 if (todo._id === action.payload) {
                     todo.isComplete = !todo.isComplete;
@@ -60,12 +67,12 @@ const reducer = (state, action) => {
                 todos: completeTodos
             }
 
-        case 'SET_EDIT_TODO':
+        case SET_EDIT_TODO:
             //undo edit
-            if (state.editTodo._id === action.payload._id) {
+            if (state.editTodo?._id === action.payload._id) {
                 return {
                     ...state,
-                    editTodo: -1
+                    editTodo: null
                 }
             } else {
                 //do the edit
@@ -75,13 +82,13 @@ const reducer = (state, action) => {
                 }
             }
 
-        case 'SET_FILTER_TODO':
+        case SET_FILTER_TODO:
             return {
                 ...state,
                 filterState: action.payload
             }
 
-        case 'TOGGLE_ROW_COLOR':
+        case TOGGLE_ROW_COLOR:
             return {
                 ...state,
                 isAlternateRowColor: !state.isAlternateRowColor
