@@ -8,7 +8,7 @@ import { ADD_TODO, EDIT_TODO } from "../../constants/actionTypes";
 
 const AddTodo = () => {
     const { todosState, todosDispatch } = useContext(TodosContext);
-    const { authState, authDispatch } = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
 
     const [value, setValue] = useState("");
 
@@ -27,13 +27,12 @@ const AddTodo = () => {
         if (value.trim() === '') {
             alert("cannot add blank note");
         } else {
-            //todo bug here 
             if (todosState.editTodo) {
                 authState.user ? await editTodo({ text: value }, todosState, todosDispatch) : todosDispatch({ type: EDIT_TODO, payload: value });
             } else {
                 authState.user ? await addTodo({ text: value }, todosDispatch) : todosDispatch({ type: ADD_TODO, payload: value });
-
             }
+
             setValue('');
         }
         //  }

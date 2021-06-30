@@ -10,7 +10,7 @@ import { DELETE_TODO, SET_EDIT_TODO, COMPLETE_TODO } from "../../constants/actio
 
 const Todo = ({ todo, index, theme }) => {
     const { todosState, todosDispatch } = useContext(TodosContext);
-    const { authState, authDispatch } = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
 
     const useStyles = makeStyles(theme => ({
         edit: {
@@ -30,9 +30,7 @@ const Todo = ({ todo, index, theme }) => {
     }
 
     const handleEdit = () => {
-          todosDispatch({ type: SET_EDIT_TODO, payload: todo });
-      //  authState.user ? editTodo(todo._id, todo, todosDispatch) : todosDispatch({ type: EDIT_TODO, payload: todo });
-
+        todosDispatch({ type: SET_EDIT_TODO, payload: todo });
     }
 
     const handleComplete = async () => {

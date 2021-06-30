@@ -12,16 +12,14 @@ const reducer = (state, action) => {
 
         case ADD_TODO:
             let newTodos = null;
-            console.log('add todo: ',action.payload );
+
             if (!action.payload._id) {
-                console.log('no id');
                 const newTodo = {
                     _id: uuid(),
                     text: action.payload
                 }
                 newTodos = [...state.todos, newTodo];
             } else {
-                console.log('id');
                 newTodos = [...state.todos, action.payload];
             }
 
@@ -45,7 +43,6 @@ const reducer = (state, action) => {
             }
 
         case DELETE_TODO:
-            console.log('deleting todo');
             const deleteTodos = state.todos.filter(todo => action.payload !== todo._id)
             return {
                 ...state,

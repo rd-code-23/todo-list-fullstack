@@ -17,7 +17,6 @@ const FilterTodos = ({ theme }) => {
     const classes = useStyles();
 
     const handleChange = (event) => {
-        console.log("changin todos state", event.target.value);
         todosDispatch({ type: SET_FILTER_TODO, payload: event.target.value });
     };
 
@@ -35,7 +34,6 @@ const FilterTodos = ({ theme }) => {
                         id: 'age-native-helper',
                     }}
                 >
-                    {/* <option aria-label="None" value="" /> */}
                     <option value={FILTER_ALL}>All</option>
                     <option value={FILTER_COMPLETE}>Complete</option>
                     <option value={FILTER_INCOMPLETE}>Incomplete</option>

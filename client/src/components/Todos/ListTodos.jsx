@@ -12,13 +12,13 @@ const ListTodos = ({ theme }) => {
     useEffect(() => {
         switch (todosState.filterState) {
             case FILTER_COMPLETE:
-                setFilterdTodos(todosState.todos.filter(todo => todo.isComplete))
+                setFilterdTodos(todosState.todos.filter(todo => todo.isComplete));
                 break;
             case FILTER_INCOMPLETE:
-                setFilterdTodos(todosState.todos.filter(todo => !todo.isComplete))
+                setFilterdTodos(todosState.todos.filter(todo => !todo.isComplete));
                 break;
             default:
-                return setFilterdTodos(todosState.todos)
+                return setFilterdTodos(todosState.todos);
         }
 
     }, [todosState.todos, todosState.filterState])

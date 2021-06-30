@@ -9,7 +9,7 @@ import { TOGGLE_ROW_COLOR } from "../../constants/actionTypes";
 
 const Nav = () => {
     const { todosState, todosDispatch } = useContext(TodosContext);
-    const { authState} = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
 
     const [isShowDeleteTodosDialog, setIsShowDeleteTodosDialog] = useState(false);
 
