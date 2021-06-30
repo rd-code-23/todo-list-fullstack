@@ -7,7 +7,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 todos: action.payload,
-                editTodo: -1
+                editTodo: null
             }
 
         case ADD_TODO:
@@ -41,7 +41,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 todos: newEditTodos,
-                editTodo: -1
+                editTodo: null
             }
 
         case DELETE_TODO:
@@ -72,10 +72,10 @@ const reducer = (state, action) => {
 
         case SET_EDIT_TODO:
             //undo edit
-            if (state.editTodo._id === action.payload._id) {
+            if (state.editTodo?._id === action.payload._id) {
                 return {
                     ...state,
-                    editTodo: -1
+                    editTodo: null
                 }
             } else {
                 //do the edit

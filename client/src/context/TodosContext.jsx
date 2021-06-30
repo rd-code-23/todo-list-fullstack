@@ -3,7 +3,7 @@ import { FILTER_ALL } from '../constants/filterValues';
 
 export const TodosContext = createContext({
     todos: [],
-    editTodo: -1,
+    editTodo: null,
     filterState: FILTER_ALL,
     isAlternateRowColor: false
 });

@@ -44,6 +44,20 @@ export const deleteAllTodos = async (dispatch) => {
     }
 };
 
+export const editTodo = async (todo, state, dispatch) => {
+    try {
+        console.log('edit: ', todo);
+        console.log('state: ', state);
+        todo = { text: todo.text }
+        //    todo.isComplete = !todo.isComplete;
+        await api.editTodo(state.editTodo._id, todo);
+        dispatch({ type: EDIT_TODO, payload: todo.text });
+        return true;
+    } catch (error) {
+        return false;
+    }
+};
+
 export const completeTodo = async (id, todo, dispatch) => {
     try {
         todo = { text: todo.text, isComplete: !!todo.isComplete }

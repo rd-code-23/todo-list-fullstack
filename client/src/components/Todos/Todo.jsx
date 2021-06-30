@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../../context/TodosContext';
 import { AuthContext } from '../../context/AuthContext';
-import { deleteTodo, completeTodo } from '../../actions/todos';
+import { deleteTodo, completeTodo, editTodo } from '../../actions/todos';
 import { makeStyles } from '@material-ui/core/styles';
 import Media from 'react-media';
 import LargeTable from './tables/LargeTable';
@@ -14,11 +14,11 @@ const Todo = ({ todo, index, theme }) => {
 
     const useStyles = makeStyles(theme => ({
         edit: {
-            backgroundColor: todosState.editTodo._id === todo._id ? '#283618' : 'dark',
+            backgroundColor: todosState.editTodo?._id === todo._id ? '#283618' : 'dark',
         },
 
         classesRowEvenColor: {
-            backgroundColor: todosState.editTodo._id === todo._id ? '#283618' : theme.palette.divider,
+            backgroundColor: todosState.editTodo?._id === todo._id ? '#283618' : theme.palette.divider,
         },
 
     }));
@@ -30,13 +30,14 @@ const Todo = ({ todo, index, theme }) => {
     }
 
     const handleEdit = () => {
-        todosDispatch({ type: SET_EDIT_TODO, payload: todo });
+          todosDispatch({ type: SET_EDIT_TODO, payload: todo });
+      //  authState.user ? editTodo(todo._id, todo, todosDispatch) : todosDispatch({ type: EDIT_TODO, payload: todo });
+
     }
 
     const handleComplete = async () => {
         authState.user ? await completeTodo(todo._id, todo, todosDispatch) : todosDispatch({ type: COMPLETE_TODO, payload: todo._id });
 
-        // todosDispatch({ type: COMPLETE_TODO, payload: todo._id });
     }
 
     const handleRowColor = (index, iaAlternateRowColor) => {
