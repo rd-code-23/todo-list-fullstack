@@ -30,9 +30,7 @@ export const createTodo = async (req, res) => {
 
 export const editTodo = async (req, res) => {
     try {
-     console.log(req.body);
         const updates = Object.keys(req.body) // gets properties
-        console.log(updates);
         const allowedUpdates = ['text', 'isComplete'];
         const isValidOperation = updates.every(update => allowedUpdates.includes(update))
 
