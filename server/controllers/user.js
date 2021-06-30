@@ -1,7 +1,7 @@
 import express from 'express';
 import User from '../models/user';
 const router = new express.Router();
-
+//
 export const signUp = async (req, res) => {
     try {
         const user = new User(req.body);
