@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
-import { Grid, Fab, TextField, } from '@material-ui/core';
+import { Grid, Fab, TextField, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import TodosContext from '../../context/TodosContext';
 import { addTodo, editTodo } from '../../actions/todos';
@@ -23,7 +23,7 @@ const AddTodo = () => {
 
     const handleAdd = async (e) => {
         e.preventDefault();
-        // if (e.keyCode === 13) {
+
         if (value.trim() === '') {
             alert("cannot add blank note");
         } else {
@@ -35,7 +35,6 @@ const AddTodo = () => {
 
             setValue('');
         }
-        //  }
     }
 
     useEffect(() => {
@@ -47,19 +46,18 @@ const AddTodo = () => {
     }, [todosState.editTodo]);
 
 
-    return (
+    return (<form onSubmit={handleAdd}>
         <Grid container item xs={12} justify="center" alignItems="center" >
             <Grid item  >
                 <TextField id="filled-basic" label="Todo" variant="filled" style={{ margin: "10px" }} value={value || ''} onChange={handleChange} inputRef={ref} />
             </Grid>
             <Grid item >
-                <form >
-                    <Fab size="small" color="secondary" aria-label="add" type="submit" onClick={handleAdd}>
-                        <AddIcon />
-                    </Fab>
-                </form>
+                <Fab size="small" color="secondary" aria-label="add" type="submit" >
+                    <AddIcon />
+                </Fab>
             </Grid>
         </Grid>
+    </form>
     )
 }
 

@@ -43,8 +43,6 @@ const Nav = () => {
                 }
             </Grid>
             <Grid container justify="flex-end" alignItems="center" wrap={'nowrap'}>
-
-
                 <Tooltip title={<p style={{ fontSize: "2em", padding: '3px' }}>Alternate Row Color</p>}>
                     <Switch
                         checked={todosState.checkedA}
