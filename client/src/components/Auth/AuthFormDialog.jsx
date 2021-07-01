@@ -42,7 +42,9 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
         authDispatch({ type: AUTH_FAIL, payload: null }); // clear error message
     };
 
-    const handleLogin = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
         const form = { name, email, password };
 
         if (isSignUp && password !== confirmPassword) {
@@ -78,28 +80,33 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
                 }
 
                 <Grid container jusify="center" spacing={2}>
-                    <form className={classes.root} noValidate autoComplete="off">
+                    <form className={classes.root} noValidate autoComplete="off" onSubmit={handleLogin}>
                         <Grid container jusify="center" direction="column" spacing={2}>
                             {
                                 isSignUp &&
-                                <Input name="name" label="Name" handleChange={(e) => setName(e.target.value)} autoFocus />
+                                <Input autoFocus name="name" label="Name" handleChange={(e) => setName(e.target.value)} />
                             }
-                            <Input name="email" label="Email Address" handleChange={(e) => setEmail(e.target.value)} type="email" />
+                            {
+                                isSignUp ?
+                                    <Input name="email" label="Email Address" handleChange={(e) => setEmail(e.target.value)} type="email" /> :
+                                    <Input autoFocus name="email" label="Email Address" handleChange={(e) => setEmail(e.target.value)} type="email" />
+                            }
                             <Input name="password" label="Password" handleChange={(e) => setPassword(e.target.value)} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
                             {
                                 isSignUp &&
                                 <Input name="confirmPassword" label="Repeat Password" handleChange={(e) => setConfirmPassword(e.target.value)} type="password" />
                             }
                         </Grid>
+                        <DialogActions>
+                            <Button variant="contained" color="secondary" type="submit">
+                                {isSignUp ? 'Signup' : 'Login'}
+                            </Button>
+                        </DialogActions>
                     </form>
                 </Grid>
             </DialogContent>
 
-            <DialogActions>
-                <Button autoFocus variant="contained" onClick={handleLogin} color="secondary">
-                    {isSignUp ? 'Signup' : 'Login'}
-                </Button>
-            </DialogActions>
+
         </Dialog>
     )
 }
