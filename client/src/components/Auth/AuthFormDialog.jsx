@@ -105,8 +105,6 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
                     </form>
                 </Grid>
             </DialogContent>
-
-
         </Dialog>
     )
 }

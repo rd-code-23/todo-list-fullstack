@@ -46,18 +46,19 @@ const AddTodo = () => {
     }, [todosState.editTodo]);
 
 
-    return (<form onSubmit={handleAdd}>
-        <Grid container item xs={12} justify="center" alignItems="center" >
-            <Grid item  >
-                <TextField id="filled-basic" label="Todo" variant="filled" style={{ margin: "10px" }} value={value || ''} onChange={handleChange} inputRef={ref} />
+    return (
+        <form onSubmit={handleAdd}>
+            <Grid container item xs={12} justify="center" alignItems="center" >
+                <Grid item  >
+                    <TextField id="filled-basic" label="Todo" variant="filled" style={{ margin: "10px" }} value={value || ''} onChange={handleChange} inputRef={ref} />
+                </Grid>
+                <Grid item >
+                    <Fab size="small" color="secondary" aria-label="add" type="submit" >
+                        <AddIcon />
+                    </Fab>
+                </Grid>
             </Grid>
-            <Grid item >
-                <Fab size="small" color="secondary" aria-label="add" type="submit" >
-                    <AddIcon />
-                </Fab>
-            </Grid>
-        </Grid>
-    </form>
+        </form>
     )
 }
 
