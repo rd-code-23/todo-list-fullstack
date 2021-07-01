@@ -1,20 +1,14 @@
 import React, { useContext } from 'react';
+import useStyles from './styles';
 import { Grid, FormControl, InputLabel, Select } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import TodosContext from '../../context/TodosContext';
 import { SET_FILTER_TODO } from "../../constants/actionTypes";
 import { FILTER_ALL, FILTER_COMPLETE, FILTER_INCOMPLETE } from '../../constants/filterValues';
 
-const FilterTodos = ({ theme }) => {
-    const { todosState, todosDispatch } = useContext(TodosContext);
-    const useStyles = makeStyles({
-        formControl: {
-            margin: theme.spacing(1),
-            minWidth: 120,
-        },
-    });
-
+const FilterTodos = () => {
     const classes = useStyles();
+
+    const { todosState, todosDispatch } = useContext(TodosContext);
 
     const handleChange = (event) => {
         todosDispatch({ type: SET_FILTER_TODO, payload: event.target.value });

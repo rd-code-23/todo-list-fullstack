@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, makeStyles, Grid } from '@material-ui/core';
+import useStyles from './styles';
+import { Button, Grid } from '@material-ui/core';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { signin, signup } from '../../actions/auth';
@@ -8,23 +9,6 @@ import { getTodos } from '../../actions/todos';
 import Input from './Input';
 
 const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, setAskForSaveTodos, isSignUp, isSetShowAuthFormDialog }) => {
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            '& > *': {
-                margin: theme.spacing(1),
-                width: '25ch',
-            },
-        },
-        shadow: {
-            '& .MuiPaper-root': {
-                margin: '0!important',
-                marginBottom: '20px!important',
-            },
-            '& .MuiDialogContent-root': {
-                maxWidth: 220
-            }
-        },
-    }));
     const classes = useStyles();
 
     const [open, setOpen] = useState(true);

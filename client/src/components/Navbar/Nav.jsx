@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import useStyles from './styles';
 import { Grid, Fab, Switch, Tooltip, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import TodosContext from '../../context/TodosContext';
@@ -6,17 +7,9 @@ import AuthContext from '../../context/AuthContext';
 import DeleteTodosDialog from './DeleteTodosDialog';
 import Auth from '../Auth/Auth'
 import { TOGGLE_ROW_COLOR } from "../../constants/actionTypes";
-import { makeStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const Nav = () => {
-    const mobile = useMediaQuery('(max-width:720px)');
-
-    const useStyles = makeStyles((theme) => ({
-        welcomeMessage: {
-            fontSize: `${mobile ? '14px' : '18px'}`
-        },
-    }));
+    const classes = useStyles();
 
     const { todosState, todosDispatch } = useContext(TodosContext);
     const { authState } = useContext(AuthContext);
@@ -30,7 +23,6 @@ const Nav = () => {
     const handleDeleteTodosDialog = () => {
         setIsShowDeleteTodosDialog(true)
     }
-    const classes = useStyles();
 
     return (
         <>
