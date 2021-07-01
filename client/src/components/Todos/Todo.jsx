@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import TodosContext from '../../context/TodosContext';
 import { AuthContext } from '../../context/AuthContext';
-import { deleteTodo, completeTodo, editTodo } from '../../actions/todos';
+import { deleteTodo, completeTodo } from '../../actions/todos';
 import { makeStyles } from '@material-ui/core/styles';
 import Media from 'react-media';
 import LargeTable from './tables/LargeTable';
@@ -20,7 +20,6 @@ const Todo = ({ todo, index, theme }) => {
         classesRowEvenColor: {
             backgroundColor: todosState.editTodo?._id === todo._id ? '#283618' : theme.palette.divider,
         },
-
     }));
 
     const classes = useStyles(theme);

@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useContext, useReducer, useEffect } from 'react';
-import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import useStyles from './styles';
+import theme from './theme'
+import { ThemeProvider } from '@material-ui/core/styles';
 import { Grid, Paper, AppBar, Toolbar } from '@material-ui/core';
 import Nav from './components/Navbar/Nav';
 import AddTodo from './components/Todos/AddTodo';
@@ -13,30 +15,6 @@ import AuthReducer from './reducers/authReducer';
 import { getTodos } from './actions/todos';
 import { SIGN_IN } from "./constants/actionTypes";
 import { PROFILE } from './constants/localStorage';
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark'
-  }
-})
-
-const useStyles = makeStyles({
-  appContainer: {
-    minHeight: '100vh',
-    width: '100vw'
-  },
-
-  todosContainer: {
-    marginTop: '150px',
-    width: '45vw',
-    maxWidth: '850px',
-    minWidth: '300px'
-  },
-
-  toolbar: {
-    maxWidth: '1800px'
-  }
-});
 
 function App() {
   const classes = useStyles();
@@ -88,7 +66,6 @@ function App() {
       </AuthContext.Provider>
     </TodosContext.Provider>
   );
-
 }
 
 
