@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const hostName = window.location.hostname === 'localhost'
     ? 'http://localhost:5000'
-    : ''
+    : 'https://rd-todo-list.herokuapp.com/'
 
 const API = axios.create({ baseURL: hostName });
 
