@@ -5,14 +5,14 @@ const todoSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }, 
+    },
     isComplete: {
         type: Boolean,
         default: false,
         trim: true
     },
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
         ref: 'User'
     }

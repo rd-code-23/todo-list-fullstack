@@ -26,7 +26,7 @@ export const signup = async (formData, authDispatch) => {
 
 export const signout = async (authDispatch, todosDispatch) => {
     try {
-        const results = JSON.parse(localStorage.getItem(PROFILE))
+        const results = JSON.parse(localStorage.getItem(PROFILE));
         const { data } = await api.signOut(results.token);
         authDispatch({ type: SIGN_OUT, payload: data });
         todosDispatch({ type: DELETE_ALL_TODO });

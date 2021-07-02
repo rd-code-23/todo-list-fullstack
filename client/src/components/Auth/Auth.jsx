@@ -23,6 +23,7 @@ const Auth = () => {
         setIsSignUp(true);
         isSetShowAuthFormDialog(true);
     }
+    
     const showSignInDialog = () => {
         setIsSignUp(false);
         isSetShowAuthFormDialog(true);

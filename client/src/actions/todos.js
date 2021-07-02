@@ -1,10 +1,9 @@
 import * as api from '../api/api';
-import { SET_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, DELETE_ALL_TODO, COMPLETE_TODO, SET_EDIT_TODO, SET_FILTER_TODO, TOGGLE_ROW_COLOR } from "../constants/actionTypes";
+import { SET_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, DELETE_ALL_TODO, COMPLETE_TODO } from "../constants/actionTypes";
 
 export const getTodos = async (dispatch) => {
     try {
         const { data } = await api.getTodos();
-        console.log(data);
         dispatch({ type: SET_TODOS, payload: data });
         return true;
     } catch (error) {
