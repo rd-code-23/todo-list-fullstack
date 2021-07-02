@@ -8,7 +8,6 @@ export const signUp = async (req, res) => {
 
         const duplicateEmail = await User.findOne({ email: user.email });
         if (duplicateEmail) {
-            //return res.status(400).send({ message: "User already exists" })
             throw new Error('User already exists');
         }
 
@@ -26,6 +25,7 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findByCredentials(email, password);
         const token = await user.generateAuthToken();
+
         res.status(200).send({ user, token });
     } catch (error) {
         res.status(400).send(error.message)
@@ -48,6 +48,7 @@ export const logout = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         await req.user.remove();
+
         res.send(req.user);
     } catch (e) {
         res.status(500).send();
@@ -57,6 +58,7 @@ export const deleteUser = async (req, res) => {
 export const deleteUsers = async (req, res) => {
     try {
         await User.deleteMany();
+
         res.send();
     } catch (error) {
         res.status(500).send(error.message)

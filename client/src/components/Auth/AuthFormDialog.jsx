@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
+import { GoogleLogin } from 'react-google-login';
+import Icon from './icon';
 import { Button, Grid } from '@material-ui/core';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import { Dialog, DialogContent, DialogTitle } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { signin, signup } from '../../actions/auth';
-import { AUTH_FAIL } from '../../constants/actionTypes';
+import { SIGN_IN, AUTH_FAIL } from '../../constants/actionTypes';
 import { getTodos } from '../../actions/todos';
 import Input from './Input';
 
@@ -48,6 +50,27 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
         }
     }
 
+    const googleSuccess = async (res) => {
+        try {
+            const result = res?.profileObj;
+            const token = res?.tokenId;
+            const data = { user: { name: result.name, email: result.email }, token };
+            authDispatch({ type: SIGN_IN, payload: data });
+            handleClose();
+            if (todosState.todos.length > 0) {
+                setAskForSaveTodos(true);
+            } else {
+                await getTodos(todosDispatch);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const googleFailure = () => {
+        console.log('Google login fail');
+    }
+
     return (
         <Dialog
             padding={10}
@@ -81,11 +104,29 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
                                 <Input name="confirmPassword" label="Repeat Password" handleChange={(e) => setConfirmPassword(e.target.value)} type="password" />
                             }
                         </Grid>
-                        <DialogActions>
-                            <Button variant="contained" color="secondary" type="submit">
-                                {isSignUp ? 'Signup' : 'Login'}
-                            </Button>
-                        </DialogActions>
+
+                        <Button variant="contained" color="secondary" type="submit" fullWidth>
+                            {isSignUp ? 'Signup' : 'Login'}
+                        </Button>
+
+                        <GoogleLogin
+                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                            render={(renderProps) => (
+                                <Button
+                                    className={classes.googleButton}
+                                    color="primary"
+                                    fullWidth
+                                    onClick={renderProps.onClick}
+                                    disabled={renderProps.disabled}
+                                    startIcon={<Icon />}
+                                    variant="contained">
+                                    Google Sign In
+                                </Button>
+                            )}
+                            onSuccess={googleSuccess}
+                            onFailure={googleFailure}
+                            cookiePolicy="single_host_origin"
+                        />
                     </form>
                 </Grid>
             </DialogContent>
