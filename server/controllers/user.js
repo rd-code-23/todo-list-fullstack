@@ -34,10 +34,15 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token !== req.token;
-        })
-        await req.user.save();
+        const isGoogleLogin = req.token.length >= 500;
+
+        if (!isGoogleLogin) {
+            req.user.tokens = req.user.tokens.filter((token) => {
+                return token.token !== req.token;
+            });
+
+            await req.user.save();
+        }
 
         res.send();
     } catch (e) {

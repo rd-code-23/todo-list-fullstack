@@ -8,6 +8,7 @@ const authReducer = (state, action) => {
             return { ...state, user: action.payload.user }
 
         case SIGN_OUT:
+            console.log('signing out');
             localStorage.clear();
             return { user: null }
 
