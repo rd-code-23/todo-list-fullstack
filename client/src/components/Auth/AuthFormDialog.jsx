@@ -17,14 +17,14 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState(false);
-    const [confirmPassword, setConfirmPassword] = useState(false)
+    const [confirmPassword, setConfirmPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const handleShowPassword = () => setShowPassword(!showPassword);
 
     const handleClose = () => {
         setOpen(false);
-        isSetShowAuthFormDialog(false)
+        isSetShowAuthFormDialog(false);
         authDispatch({ type: AUTH_FAIL, payload: null }); // clear error message
     };
 
@@ -35,7 +35,7 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
 
         if (isSignUp && password !== confirmPassword) {
             authDispatch({ type: AUTH_FAIL, payload: 'Passwords not matching' });
-            return
+            return;
         }
 
         const isAuthenticated = isSignUp ? await signup(form, authDispatch) : await signin(form, authDispatch);
@@ -63,7 +63,7 @@ const AuthFormDialog = ({ authState, authDispatch, todosState, todosDispatch, se
                 await getTodos(todosDispatch);
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
