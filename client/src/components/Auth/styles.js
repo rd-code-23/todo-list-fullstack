@@ -19,5 +19,11 @@ export default makeStyles((theme) => ({
     googleButton: {
         marginBottom: theme.spacing(2),
     },
+    authButton: {
+        '@media (max-width:720px)': {
+            fontSize: '12px',
+            padding: '7px'
+        }
+    }
 }));
 

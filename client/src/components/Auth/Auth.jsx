@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import useStyles from './styles';
 import { Button, Box } from '@material-ui/core';
 import { signout } from '../../actions/auth';
 import AuthContext from '../../context/AuthContext';
@@ -7,6 +8,8 @@ import SaveTodosDialog from './SaveTodosDialog';
 import AuthFormDialog from './AuthFormDialog';
 
 const Auth = () => {
+    const classes = useStyles();
+
     const [isAskForSaveTodos, isSetAskForSaveTodos] = useState(false);
     const [isShowAuthFormDialog, isSetShowAuthFormDialog] = useState(false);
     const [isSignUp, setIsSignUp] = useState(false);
@@ -23,7 +26,7 @@ const Auth = () => {
         setIsSignUp(true);
         isSetShowAuthFormDialog(true);
     }
-    
+
     const showSignInDialog = () => {
         setIsSignUp(false);
         isSetShowAuthFormDialog(true);
@@ -43,12 +46,12 @@ const Auth = () => {
                     (<Button variant="contained" color="secondary" onClick={handleLogout}>
                         Logout
                     </Button>) :
-                    (<Box display="flex" justifyContent="space-between" >
+                    (<Box display="flex" justifyContent="space-between">
                         <Box mr={1}>
-                            <Button variant="contained" color="secondary" onClick={showSignInDialog}>
+                            <Button variant="contained" color="secondary" onClick={showSignInDialog} className={classes.authButton}>
                                 Sign in
                             </Button> </Box>
-                        <Button variant="contained" onClick={showSignupDialog} color="secondary" autoFocus>
+                        <Button variant="contained" onClick={showSignupDialog} color="secondary" className={classes.authButton}>
                             Signup
                         </Button>
                     </Box>)
