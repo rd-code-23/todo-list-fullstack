@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useContext, useReducer, useEffect } from 'react';
 import useStyles from './styles';
-import theme from './theme'
+import theme from './theme';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Grid, Paper, AppBar, Toolbar } from '@material-ui/core';
 import Nav from './components/Navbar/Nav';
