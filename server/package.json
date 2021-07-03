@@ -7,7 +7,7 @@
   "scripts": {
     "test": "env-cmd -f ./config/test.env  mocha --experimental-specifier-resolution=node --exit --timeout 10000",
     "start": "node --experimental-specifier-resolution=node index.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon --experimental-specifier-resolution=node index.js "
+    "dev": "env-cmd -f ./config/dev.env nodemon --experimental-specifier-resolution=node index.js"
   },
   "keywords": [],
   "author": "",
