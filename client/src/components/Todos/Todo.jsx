@@ -8,7 +8,7 @@ import LargeTable from './tables/LargeTable';
 import SmallTable from './tables/SmallTable';
 import { DELETE_TODO, SET_EDIT_TODO, COMPLETE_TODO } from "../../constants/actionTypes";
 
-const Todo = ({ todo, index, theme }) => {
+const Todo = ({ todo, index }) => {
     const { todosState, todosDispatch } = useContext(TodosContext);
     const { authState } = useContext(AuthContext);
 
@@ -18,11 +18,11 @@ const Todo = ({ todo, index, theme }) => {
         },
 
         classesRowEvenColor: {
-            backgroundColor: todosState.editTodo?._id === todo._id ? '#283618' : theme.palette.divider,
+            backgroundColor: todosState.editTodo?._id === todo._id ? '#283618' : theme.palette.divider
         },
     }));
 
-    const classes = useStyles(theme);
+    const classes = useStyles();
 
     const handleDelete = async () => {
         authState.user ? await deleteTodo(todo._id, todosDispatch) : todosDispatch({ type: DELETE_TODO, payload: todo._id });
