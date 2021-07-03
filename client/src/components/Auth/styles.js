@@ -20,7 +20,7 @@ export default makeStyles((theme) => ({
         marginBottom: theme.spacing(2),
     },
     authButton: {
-        '@media (max-width:720px)': {
+        [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
             fontSize: '12px',
             padding: '7px'
         }
