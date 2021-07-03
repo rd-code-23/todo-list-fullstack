@@ -34,7 +34,6 @@ export const editTodo = async (req, res) => {
         const isValidOperation = updates.every(update => allowedUpdates.includes(update))
 
         if (!isValidOperation) {
-            console.log('not valid');
             res.status(400).send();
         }
 
