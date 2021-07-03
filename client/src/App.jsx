@@ -54,9 +54,9 @@ function App() {
               <Grid item >
                 <Paper elevation={15} className={classes.todosContainer}>
                   <AddTodo />
-                  <FilterTodos theme={theme} />
+                  <FilterTodos />
                   <Paper style={{ maxHeight: '60vh', overflow: 'auto', paddingBottom: '10px' }} elevation={0}>
-                    <ListTodos theme={theme} />
+                    <ListTodos />
                   </Paper>
                 </Paper>
               </Grid>
