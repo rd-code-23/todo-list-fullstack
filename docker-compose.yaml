@@ -4,6 +4,9 @@ services:
     build: ./client
     ports: 
       - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
     volumes: 
       - ./client/src:/app/src
     stdin_open: true
