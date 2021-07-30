@@ -12,7 +12,7 @@
     
 2. Start Application
 
-     ### &ensp; With Docker:
+     ### &ensp; With Docker (tested on wsl2):
     #####  &ensp;&ensp;&ensp;Start Application:
      &ensp;&ensp;&ensp;```docker-compose up ```
     #####  &ensp;&ensp;&ensp;See output for services in seperate terminal
