@@ -15,7 +15,7 @@
     ### With Docker (tested on wsl2):
     ##### Start Application:
     ```docker-compose up app ```
-    ##### See output for services in seperate terminal
+    ##### See output for services in seperate terminal:
     ```docker-compose logs -f app```
 
     ```docker-compose logs -f server```
@@ -33,7 +33,7 @@
     &emsp;```npm i && npm start``` 
 
     #### Server:
-    &ensp;&emsp;1. Go into server directory 
+    &ensp;&emsp;1. Go into server directory:
 
     &ensp;&emsp;``` cd server ```
 
