@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  client:
+  app:
     build: ./client
     ports: 
       - '3000:3000'
@@ -24,3 +24,16 @@ services:
       - /app/node_modules
     env_file: 
       - ./server/config/dev.env
+    command: npm run dev
+  test:
+    build: ./server
+    ports:
+      - '5000:5000'
+    volumes: 
+      - ./server:/app
+      - /app/node_modules
+    env_file: 
+      - ./server/config/dev.env
+    command: npm run test
+
+    
