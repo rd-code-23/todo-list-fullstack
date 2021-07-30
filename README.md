@@ -2,42 +2,55 @@
 
 ## Quick Start
 
-1. Fill out envrionment variables
+1. Fill out envrionment variables:
 
-    &ensp;Go into client and fill out .env file:
-    &ensp;``` cd client ```
+    Go into client and fill out .env file:
+    ``` cd client ```
 
-    &ensp;Go into server/config and fill out dev.env file:
-    &ensp;``` cd server/config ```
+    Go into server/config and fill out dev.env file:
+    ``` cd server/config ```
     
-2. Start Application
+2. Start Application:
 
-     ### &ensp; With Docker (tested on wsl2):
-    #####  &ensp;&ensp;&ensp;Start Application:
-     &ensp;&ensp;&ensp;```docker-compose up ```
-    #####  &ensp;&ensp;&ensp;See output for services in seperate terminal
-     &ensp;&ensp;&ensp;```docker-compose logs -f client```
+    ### With Docker (tested on wsl2):
+    ##### Start Application:
+    ```docker-compose up app ```
+    ##### See output for services in seperate terminal
+    ```docker-compose logs -f app```
+
+    ```docker-compose logs -f server```
     
-     &ensp;&ensp;&ensp;```docker-compose logs -f server```
+    ### Without Docker:
+
+    #### Client:
+
+    1. Go into client directory:
+
+    &emsp;``` cd client ```
+
+    2. To start client:
+
+    &emsp;```npm i && npm start``` 
+
+    #### Server:
+    &ensp;&emsp;1. Go into server directory 
+
+    &ensp;&emsp;``` cd server ```
+
+    &ensp;&emsp;2. To start server:
+
+    &ensp;&emsp;```npm i && npm run dev``` 
+
+    ## Run Unit Tests
     
-    ### &ensp; Without Docker:
+    1. Fill out envrionment variables:
 
-    ####  &ensp;&ensp;&ensp;Client:
+       Go into server/config and fill out test.env file:  ```cd server/config```
 
-     &ensp;&emsp; 1. Go into client directory 
+    2. Start Application:
+        ### With Docker (tested on wsl2):
+        ```docker-compose up test```
+        ### Without Docker:
+        ``` cd server ```
 
-     &ensp;&emsp;``` cd client ```
-
-     &ensp;&emsp;2. To start client:
-
-     &ensp;&emsp;```npm i && npm start``` 
-
-    ####  &ensp;&emsp; Server:
-     &ensp;&emsp;1. Go into server directory 
-     
-     &ensp;&emsp;``` cd server ```
-
-     &ensp;&emsp;2. To start server:
-
-     &ensp;&emsp;```npm i && npm run dev``` 
-
+        ```npm run test```
