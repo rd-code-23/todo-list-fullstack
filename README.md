@@ -14,9 +14,9 @@
 
      ### &ensp; With Docker (tested on wsl2):
     #####  &ensp;&ensp;&ensp;Start Application:
-     &ensp;&ensp;&ensp;```docker-compose up ```
+     &ensp;&ensp;&ensp;```docker-compose up app ```
     #####  &ensp;&ensp;&ensp;See output for services in seperate terminal
-     &ensp;&ensp;&ensp;```docker-compose logs -f client```
+     &ensp;&ensp;&ensp;```docker-compose logs -f app```
     
      &ensp;&ensp;&ensp;```docker-compose logs -f server```
     
@@ -40,4 +40,11 @@
      &ensp;&emsp;2. To start server:
 
      &ensp;&emsp;```npm i && npm run dev``` 
-
+     
+     ## Test
+     ### &ensp; With Docker (tested on wsl2):
+     &ensp;&ensp;&ensp;```docker-compose up test```
+     ### &ensp; Without Docker:
+     &ensp;&emsp;``` cd server ```
+     
+     &ensp;&emsp;```npm run test```
